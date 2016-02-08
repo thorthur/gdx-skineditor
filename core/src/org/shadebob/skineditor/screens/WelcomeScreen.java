@@ -165,7 +165,6 @@ public class WelcomeScreen implements Screen {
 				projectName = projectName.replace(".", "_");
 				projectName = projectName.replace("/", "_");
 				projectName = projectName.replace("\\", "_");
-				projectName = projectName.replace("-", "_");
 				if (projectName.isEmpty() == true)
 					return;
 
@@ -247,6 +246,10 @@ public class WelcomeScreen implements Screen {
 		// Copy assets
 		FileHandle assetsFolder = Gdx.files.local("resources/raw");
 		assetsFolder.copyTo(projectFolder.child("assets"));
+		
+		// Remove useless "widgets"
+		projectFolder.child("assets").child("widgets").deleteDirectory();
+		
 		// Rebuild from raw resources
 		TexturePacker.Settings settings = new TexturePacker.Settings();
 		settings.combineSubdirectories = true;
