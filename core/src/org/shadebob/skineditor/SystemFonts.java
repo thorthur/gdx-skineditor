@@ -76,7 +76,6 @@ public class SystemFonts {
 				String filename = file.getName();
 				if (filename.toLowerCase().endsWith(".ttf")) {
 					filename = filename.substring(0, filename.length() - 4);
-					
 					String newFilename = "";
 					boolean previousIsUpper = false;
 					for (int i=0;i<filename.length();i++) {
@@ -96,7 +95,6 @@ public class SystemFonts {
 					newFilename = newFilename.replace("/", "_");
 					newFilename = newFilename.replace("\\", "_");
 					newFilename = newFilename.replace(".", "_");
-
 					fonts.put(newFilename, file);
 				}
 			}
@@ -111,8 +109,8 @@ public class SystemFonts {
 		
 		fonts.clear();
 		for(String fontPath : fontPaths) {
-			
-			searchForFonts(fontPath);
+
+			searchForFonts(fontPath.replaceFirst("^~",System.getProperty("user.home")));
 		}
 
 		

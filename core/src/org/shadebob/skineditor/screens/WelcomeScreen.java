@@ -1,6 +1,5 @@
 package org.shadebob.skineditor.screens;
 
-import org.shadebob.skineditor.NinePatchEditorDialog;
 import org.shadebob.skineditor.SkinEditorGame;
 
 import com.badlogic.gdx.Gdx;
@@ -13,14 +12,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.SkinUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class WelcomeScreen implements Screen {
@@ -41,7 +39,6 @@ public class WelcomeScreen implements Screen {
 
 		stage.act(delta);
 		stage.draw();
-		Table.drawDebug(stage);
 
 	}
 
@@ -241,7 +238,7 @@ public class WelcomeScreen implements Screen {
 		projectFolder.mkdirs();
 		projectFolder.child("assets").mkdirs();
 		projectFolder.child("backups").mkdirs();
-		game.skin.save(projectFolder.child("uiskin.json"));
+		SkinUtils.save(game.skin, projectFolder.child("uiskin.json"));
 
 		// Copy assets
 		FileHandle assetsFolder = Gdx.files.local("resources/raw");

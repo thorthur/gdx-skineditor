@@ -34,13 +34,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
+import com.badlogic.gdx.scenes.scene2d.ui.SkinUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
@@ -400,7 +401,7 @@ public class OptionsPane extends Table {
 							game.skin.getDrawable("default-round-down"), game.skin.getDrawable("default-round"), game.skin.getFont("default-font"));
 
 					if (drawable != null) {
-						resourceName = game.skinProject.resolveObjectName(Drawable.class, drawable);
+						resourceName = SkinUtils.resolveObjectName(game.skinProject, Drawable.class, drawable);
 						buttonStyle.imageUp = drawable;
 					} else {
 						buttonStyle.up = game.skinProject.getDrawable("default-rect");
@@ -430,7 +431,7 @@ public class OptionsPane extends Table {
 
 					String resourceName = "";
 					if (color != null) {
-						resourceName = game.skinProject.resolveObjectName(Color.class, color);
+						resourceName = SkinUtils.resolveObjectName(game.skinProject, Color.class, color);
 						resourceName += " (" + color.toString() + ")";
 
 						// Create drawable on the fly
@@ -471,7 +472,7 @@ public class OptionsPane extends Table {
 							game.skin.getDrawable("default-round-down"), game.skin.getDrawable("default-round"), game.skin.getFont("default-font"));
 
 					if (font != null) {
-						resourceName = game.skinProject.resolveObjectName(BitmapFont.class, font);
+						resourceName = SkinUtils.resolveObjectName(game.skinProject, BitmapFont.class, font);
 						buttonStyle.font = font;
 					} else {
 						buttonStyle.up = game.skinProject.getDrawable("default-rect");

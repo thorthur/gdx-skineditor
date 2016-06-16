@@ -217,14 +217,18 @@ public class MenuBar extends Table {
 			public void changed(ChangeEvent event, Actor actor) {
 				
 				// Need to steal focus first with this hack (Thanks to Z-Man)
-				Frame frame = new Frame();
-				frame.setUndecorated(true);
-				frame.setOpacity(0);
-				frame.setLocationRelativeTo(null);
-				frame.setVisible(true);
-				frame.toFront();
-				frame.setVisible(false);
-				frame.dispose();
+				try {
+					Frame frame = new Frame();
+					frame.setUndecorated(true);
+					frame.setOpacity(0);
+					frame.setLocationRelativeTo(null);
+					frame.setVisible(true);
+					frame.toFront();
+					frame.setVisible(false);
+					frame.dispose();
+				} catch (UnsupportedOperationException e) {
+					// Some systems won't accept such a frame
+				}
 				
 				
 				JFileChooser chooser = new JFileChooser();

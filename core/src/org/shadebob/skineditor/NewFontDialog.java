@@ -37,6 +37,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.tools.hiero.BMFontUtil;
 import com.badlogic.gdx.tools.hiero.unicodefont.UnicodeFont;
 import com.badlogic.gdx.tools.hiero.unicodefont.effects.ColorEffect;
+import com.badlogic.gdx.tools.hiero.unicodefont.effects.OutlineEffect;
 import com.badlogic.gdx.tools.hiero.unicodefont.effects.ShadowEffect;
 import com.badlogic.gdx.utils.Array;
 
@@ -56,6 +57,7 @@ public class NewFontDialog extends Dialog {
 	private CheckBox checkBold;
 	private CheckBox checkItalic;
 	private CheckBox checkShadow;
+	private CheckBox checkOutline;
 
 	/**
 	 * 
@@ -66,7 +68,6 @@ public class NewFontDialog extends Dialog {
 		this.game = game;
 		
 		Table table = new Table(game.skin);
-		table.debug();
 		table.defaults().pad(10);
 
 		table.add("Bitmap font name:");
@@ -117,6 +118,9 @@ public class NewFontDialog extends Dialog {
 
 		checkShadow = new CheckBox("Shadow", game.skin);
 		table.add(checkShadow).left().expandX();
+
+		checkOutline = new CheckBox("Outline", game.skin);
+		table.add(checkOutline).left().expandX();
 
 		table.row();
 		
@@ -178,6 +182,17 @@ public class NewFontDialog extends Dialog {
 		});
 
 		checkShadow.addListener(new ChangeListener() {
+
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+
+				refreshFontPreview();
+
+			}
+
+		});
+
+		checkOutline.addListener(new ChangeListener() {
 
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
@@ -265,7 +280,7 @@ public class NewFontDialog extends Dialog {
 			
 			Font font = Font.createFont(Font.TRUETYPE_FONT, fontPath);
 			UnicodeFont unicodeFont = new UnicodeFont(font, Integer.valueOf(selectSize.getSelected()), checkBold.isChecked(), checkItalic.isChecked());
-						
+
 			if (checkShadow.isChecked() == true) {
 				
 				ColorEffect colorEffect = new ColorEffect();
@@ -284,6 +299,12 @@ public class NewFontDialog extends Dialog {
 				colorEffect.setColor(java.awt.Color.WHITE);
 				unicodeFont.getEffects().add(colorEffect);
 				
+			}
+			
+			if (checkOutline.isChecked()) {
+				
+				OutlineEffect outlineEffect = new OutlineEffect(1, java.awt.Color.BLACK);
+				unicodeFont.getEffects().add(outlineEffect);
 			}
 			
 			unicodeFont.addAsciiGlyphs();

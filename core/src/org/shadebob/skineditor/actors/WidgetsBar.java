@@ -34,7 +34,7 @@ import com.mobidevelop.maps.editor.ui.utils.Tooltips;
 public class WidgetsBar extends Table {
 
 	private SkinEditorGame game;
-	public ButtonGroup group;
+	public ButtonGroup<ImageButton> group;
 
 	/**
 	 * 
@@ -53,7 +53,7 @@ public class WidgetsBar extends Table {
 	 */
 	public void initializeButtons() {
 		
-		group = new ButtonGroup();
+		group = new ButtonGroup<ImageButton>();
 
 		Tooltips.TooltipStyle styleTooltip = new Tooltips.TooltipStyle(game.skin.getFont("default-font"), game.skin.getDrawable("default-round"), game.skin.getColor("white"));		
 
